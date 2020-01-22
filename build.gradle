@@ -1,5 +1,6 @@
 plugins {
     id 'com.github.johnrengelman.shadow' version '4.0.2'
+    id 'info.solidsoft.pitest' version '1.4.6'
     id 'jacoco'
 }
 
@@ -8,6 +9,7 @@ version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
 apply plugin: 'application'
+apply plugin: 'info.solidsoft.pitest'
 
 mainClassName = 'com.example.helloworld.HelloWorldApplication'
 
@@ -44,6 +46,14 @@ jacocoTestReport {
     reports {
 	xml.enabled true
     }
+}
+
+pitest {
+    targetClasses = ['com.example.helloworld.*']  //by default "${project.group}.*"
+    pitestVersion = '1.4.1' //not needed when a default PIT version should be used
+    threads = 4
+    outputFormats = ['XML', 'HTML']
+    timestampedReports = false
 }
 
 shadowJar {
