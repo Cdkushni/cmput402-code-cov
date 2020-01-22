@@ -33,3 +33,14 @@ jobs:
         echo $CODECOV_TOKEN
         ./gradlew jacocoTestReport
         bash <(curl -s https://codecov.io/bash)
+        
+    - name: Install maven
+      uses: xlui/action-maven-cli@v1.0
+
+    # Install all dependencies including pitest
+    - name: Install dependencies
+      run: mvn clean install
+
+    # Run mutation testing using pitest
+    - name: Run pitest
+      run: mvn org.pitest:pitest-maven:mutationCoverage
