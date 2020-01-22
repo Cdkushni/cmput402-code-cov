@@ -28,7 +28,7 @@ jobs:
 
     - name: Run codecov
       env:
-          CODECOV_TOKEN: ${{ secrets.cctoken }}
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       run: |
         echo $CODECOV_TOKEN
         ./gradlew jacocoTestReport
